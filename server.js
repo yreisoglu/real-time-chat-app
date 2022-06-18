@@ -6,14 +6,16 @@ const { getCurrentUser, joinUser, userDisconnect } = require("./user");
 
 app.use(express());
 
-const port = process.env.PORT | 5000;
+const port = 5000;
 
 app.use(cors());
-app.use("/", (req, res) => res.send("init"));
+
 var server = app.listen(port, console.log(`Server is running on ${port}`));
 
+
 const io = socket(server, {
-  cors: {},
+  cors: {
+  },
 });
 io.on("connection", (socket) => {
   console.log("a user connected");

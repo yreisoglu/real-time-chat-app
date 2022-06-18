@@ -3,7 +3,7 @@ import Login from "./Components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import io from "socket.io-client";
 import Chat from "./Components/Chat";
-const socket = io.connect("http://127.0.0.1:5000");
+const socket = io.connect("https://real-time-chat-yreisoglu.herokuapp.com/");
 
 function App() {
   return (
