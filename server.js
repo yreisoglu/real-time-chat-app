@@ -3,8 +3,8 @@ const app = express();
 const socket = require("socket.io");
 const cors = require("cors");
 const { getCurrentUser, joinUser, userDisconnect } = require("./user");
-
-app.use(express());
+const INDEX = '/index.html';
+app.use(express()).use((req, res) => res.sendFile(INDEX, { root: __dirname }));
 
 const port = 5000;
 
