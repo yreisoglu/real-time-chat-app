@@ -2,9 +2,9 @@ const express = require("express");
 const app = express();
 const socket = require("socket.io");
 const cors = require("cors");
+const path = require("path");
 const { getCurrentUser, joinUser, userDisconnect } = require("./user");
-const INDEX = '/index.html';
-app.use(express()).use((req, res) => res.sendFile(INDEX, { root: __dirname }));
+app.use(express());
 
 const port = process.env.PORT | 5000;
 
@@ -12,10 +12,10 @@ app.use(cors());
 
 var server = app.listen(port, console.log(`Server is running on ${port}`));
 
+app.use(express.static(path.join(__dirname, "chat-client", "build")));
 
 const io = socket(server, {
-  cors: {
-  },
+  cors: {},
 });
 io.on("connection", (socket) => {
   console.log("a user connected");
