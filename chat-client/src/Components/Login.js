@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import io from "socket.io-client";
 
 const Login = ({ socket }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
+
   const joinRoom = () => {
     if (username !== "" && room !== "") {
       socket.emit("joinRoom", username, room, (callback) => {
-        callback.status === "OK" && navigate(`/chat/${room}/${username}`);
-        console.log(callback);
+        if (callback.status === "OK") {
+          navigate(`/chat/${room}/${username}`);
+        }
       });
     }
   };

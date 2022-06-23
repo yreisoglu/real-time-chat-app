@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BiSend } from "react-icons/bi";
+import { useStore } from "zustand";
 const Chat = (props) => {
   const socket = props.socket;
-
   const { username, room } = useParams();
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
@@ -41,7 +41,6 @@ const Chat = (props) => {
           <div class="relative w-full p-6  overflow-y-auto h-[40rem]">
             <ul class="space-y-2">
               {messages.map((item) => {
-                console.log(item);
                 if (item.username === "server") {
                   return (
                     <li class="flex justify-center">
